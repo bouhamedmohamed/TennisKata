@@ -28,12 +28,18 @@ public class TennisGame1 implements TennisGame {
         if ( m_score1 == m_score2 )
             return getScoreLastPart (m_score1, EQUAL_SCORE);
         else {
-            final boolean isScoreMoreThanForty = m_score1 >= 4 || m_score2 >= 4;
-            if ( isScoreMoreThanForty )
+
+            if ( isGameMoreThanForty ( ) )
                 return getScoreSecondPart ( );
             else
-                return getScoreLastPart (m_score1, NOT_EQUAL_SCORE) + SEPARATOR + getScoreLastPart (m_score2, NOT_EQUAL_SCORE);
+                return getScoreLastPart (m_score1, NOT_EQUAL_SCORE)
+                        + SEPARATOR
+                        + getScoreLastPart (m_score2, NOT_EQUAL_SCORE);
         }
+    }
+
+    private boolean isGameMoreThanForty() {
+        return m_score1 >= 4 || m_score2 >= 4;
     }
 
     private String getScoreSecondPart() {
