@@ -1,6 +1,12 @@
 
 public class TennisGame1 implements TennisGame {
 
+    public static final String PLAYER1 = "player1";
+    public static final String SEPARATOR = "-";
+    public static final String DEUCE = "Deuce";
+    public static final String ALL = "All";
+    public static final boolean NOT_EQUAL_SCORE = false;
+    public static final boolean EQUAL_SCORE = true;
     private int m_score1 = 0;
     private int m_score2 = 0;
     private String player1Name;
@@ -12,67 +18,67 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if ( playerName == "player1" )
+        if ( playerName == PLAYER1 )
             m_score1 += 1;
         else
             m_score2 += 1;
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore = 0;
-        if ( m_score1 == m_score2 ) {
-            switch (m_score1) {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
+        String score;
 
-            }
-        } else if ( m_score1 >= 4 || m_score2 >= 4 ) {
+        if ( m_score1 >= 4 || m_score2 >= 4 ) {
             score = getScoreSecondPart ( );
-        } else {
+        } else
+            score = getScoreLastPart (m_score1, NOT_EQUAL_SCORE) + SEPARATOR + getScoreLastPart (m_score2, NOT_EQUAL_SCORE);
 
-            score = getScoreLastPart (m_score1) + "-" + getScoreLastPart (m_score2);
+        if ( m_score1 == m_score2 ) {
+
+            score = getScoreLastPart (m_score1, EQUAL_SCORE);
 
         }
         return score;
     }
 
     private String getScoreSecondPart() {
-        String score;
         int minusResult = m_score1 - m_score2;
-        if ( minusResult == 1 ) score = "Advantage player1";
-        else if ( minusResult == -1 ) score = "Advantage player2";
-        else if ( minusResult >= 2 ) score = "Win for player1";
-        else score = "Win for player2";
+        if ( minusResult > 0 ) {
+            if ( minusResult == 1 )
+                return "Advantage player1";
+            return "Win for player1";
+        } else {
+            if ( minusResult == -1 )
+                return "Advantage player2";
+            return "Win for player2";
+        }
+    }
+
+    private String getScoreLastPart(int tempScore, boolean equalScore) {
+        String score;
+        switch (tempScore) {
+            case 0:
+                score = getSuitableMessage ("Love", equalScore);
+                break;
+            case 1:
+                score = getSuitableMessage ("Fifteen", equalScore);
+                break;
+            case 2:
+                score = getSuitableMessage ("Thirty", equalScore);
+                break;
+            default:
+                return getSuitableMessage ("Forty", equalScore);
+        }
         return score;
     }
 
-    private String getScoreLastPart(int tempScore) {
-        String score = "";
-        switch (tempScore) {
-            case 0:
-                score += "Love";
-                break;
-            case 1:
-                score += "Fifteen";
-                break;
-            case 2:
-                score += "Thirty";
-                break;
-            case 3:
-                score += "Forty";
-                break;
-        }
-        return score;
+    String getSuitableMessage(String message, boolean equalScore) {
+        String lastMessage = message;
+        if ( equalScore )
+            if ( !message.equals ("Forty") )
+                lastMessage = message + SEPARATOR + ALL;
+            else
+                lastMessage = DEUCE;
+        return lastMessage;
+
     }
 }
