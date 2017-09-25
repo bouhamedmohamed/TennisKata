@@ -25,48 +25,39 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score;
-
-        if ( m_score1 >= 4 || m_score2 >= 4 ) {
-            score = getScoreSecondPart ( );
-        } else
-            score = getScoreLastPart (m_score1, NOT_EQUAL_SCORE) + SEPARATOR + getScoreLastPart (m_score2, NOT_EQUAL_SCORE);
-
-        if ( m_score1 == m_score2 ) {
-
-            score = getScoreLastPart (m_score1, EQUAL_SCORE);
-
+        if ( m_score1 == m_score2 )
+            return getScoreLastPart (m_score1, EQUAL_SCORE);
+        else {
+            final boolean isScoreMoreThanForty = m_score1 >= 4 || m_score2 >= 4;
+            if ( isScoreMoreThanForty )
+                return getScoreSecondPart ( );
+            else
+                return getScoreLastPart (m_score1, NOT_EQUAL_SCORE) + SEPARATOR + getScoreLastPart (m_score2, NOT_EQUAL_SCORE);
         }
-        return score;
     }
 
     private String getScoreSecondPart() {
         int minusResult = m_score1 - m_score2;
-        if ( minusResult > 0 ) {
-            if ( minusResult == 1 )
-                return "Advantage player1";
-            return "Win for player1";
-        } else {
-            if ( minusResult == -1 )
-                return "Advantage player2";
-            return "Win for player2";
-        }
+        if ( minusResult > 0 )
+            return minusResult == 1 ? "Advantage player1" : "Win for player1";
+        else
+            return minusResult == -1 ? "Advantage player2" : "Win for player2";
     }
 
-    private String getScoreLastPart(int tempScore, boolean equalScore) {
+    private String getScoreLastPart(int tempScore, boolean isEqualScore) {
         String score;
         switch (tempScore) {
             case 0:
-                score = getSuitableMessage ("Love", equalScore);
+                score = getSuitableMessage ("Love", isEqualScore);
                 break;
             case 1:
-                score = getSuitableMessage ("Fifteen", equalScore);
+                score = getSuitableMessage ("Fifteen", isEqualScore);
                 break;
             case 2:
-                score = getSuitableMessage ("Thirty", equalScore);
+                score = getSuitableMessage ("Thirty", isEqualScore);
                 break;
             default:
-                return getSuitableMessage ("Forty", equalScore);
+                return getSuitableMessage ("Forty", isEqualScore);
         }
         return score;
     }
