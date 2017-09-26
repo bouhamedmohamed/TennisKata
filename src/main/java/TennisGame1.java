@@ -25,7 +25,7 @@ public class TennisGame1 implements TennisGame {
             return getScoreAfterForty ( );
 
         return getScoreBeforeForty (pointPlayerOne)
-                + Rules.SEPARATOR.getValue ( )
+                + Rules.SEPARATOR
                 + getScoreBeforeForty (pointPlayerTwo);
     }
 
@@ -34,7 +34,7 @@ public class TennisGame1 implements TennisGame {
         if ( isDeuce )
             return TennisScore.DEUCE.getScoreLabel ( );
         TennisScore tennisScore = TennisScore.getScore (score);
-        return tennisScore.getScoreLabel ( ) + Rules.SEPARATOR.getValue ( ) + Rules.ALL.getValue ( );
+        return tennisScore.getScoreLabel ( ) + Rules.SEPARATOR + Rules.ALL;
     }
 
     private boolean isBreakOrMatchPoint() {
@@ -49,7 +49,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String checkAdvantageOrWin(int minusResult, String playerName) {
-        return Math.abs (minusResult) == 1 ? Rules.ADVANTAGE.getValue ( ) + playerName : Rules.WIN_FOR.getValue ( ) + playerName;
+        return Math.abs (minusResult) == 1 ? Rules.ADVANTAGE + playerName : Rules.WIN_FOR + playerName;
     }
 
     private String getScoreBeforeForty(int tempScore) {
