@@ -1,6 +1,8 @@
 public class TennisGame2 implements TennisGame {
     public static final String SEPARATOR = "-";
     public static final String ALL = "All";
+    public static final String ADVANTAGE = "Advantage ";
+    public static final String WIN_FOR = "Win for ";
     public int pointPlayerOne = 0;
     public int pointPlayerTwo = 0;
 
@@ -47,7 +49,7 @@ public class TennisGame2 implements TennisGame {
     }
 
     private String getAdvantageOrWin(int differenceResults, String playerName) {
-        return Math.abs (differenceResults) == 1 ? "Advantage " + playerName : "Win for " + playerName;
+        return Math.abs (differenceResults) == 1 ? ADVANTAGE + playerName : WIN_FOR + playerName;
     }
 
     private String getSuitableMessage(int score) {
@@ -63,7 +65,7 @@ public class TennisGame2 implements TennisGame {
     }
 
     public void wonPoint(String player) {
-        if ( player == "player1" )
+        if ( player == playerOneName )
             P1Score ( );
         else
             P2Score ( );
