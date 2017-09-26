@@ -17,22 +17,34 @@ public class TennisGame2 implements TennisGame {
     public String getScore() {
         String score = "";
         if ( p1point == p2point ) {
-            if ( p1point < 3 ) {
-                score = getSuitableMessage (p1point);
-                score += SEPARATOR + ALL;
-            } else
-                score = TennisScore.DEUCE.getScoreLabel ( );
+            score = caseEqualScore ( );
         }
 
         if ( p1point != p2point ) {
-            final boolean isBreakGame = p1point >= 4 || p2point >= 4;
-            if ( isBreakGame ) {
-                score = getScoreBreakGame ( );
-            } else {
-                p1res = getSuitableMessage (p1point);
-                p2res = getSuitableMessage (p2point);
-                score = p1res + SEPARATOR + p2res;
-            }
+            score = caseNotEqualScore ( );
+        }
+        return score;
+    }
+
+    private String caseEqualScore() {
+        String score;
+        if ( p1point < 3 ) {
+            score = getSuitableMessage (p1point);
+            score += SEPARATOR + ALL;
+        } else
+            score = TennisScore.DEUCE.getScoreLabel ( );
+        return score;
+    }
+
+    private String caseNotEqualScore() {
+        String score;
+        final boolean isBreakGame = p1point >= 4 || p2point >= 4;
+        if ( isBreakGame ) {
+            score = getScoreBreakGame ( );
+        } else {
+            p1res = getSuitableMessage (p1point);
+            p2res = getSuitableMessage (p2point);
+            score = p1res + SEPARATOR + p2res;
         }
         return score;
     }
