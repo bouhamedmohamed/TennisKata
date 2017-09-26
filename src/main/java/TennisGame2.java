@@ -38,25 +38,13 @@ public class TennisGame2 implements TennisGame {
         }
 
         if ( p1point > p2point && p1point < 4 ) {
-            if ( p1point == 2 )
-                p1res = TennisScore.THIRTY.getScore ( );
-            if ( p1point == 3 )
-                p1res = TennisScore.FORTY.getScore ( );
-            if ( p2point == 1 )
-                p2res = TennisScore.FIFTEEN.getScore ( );
-            if ( p2point == 2 )
-                p2res = TennisScore.THIRTY.getScore ( );
+            p1res = getSuitableMessage (p1point);
+            p2res = getSuitableMessage (p2point);
             score = p1res + SEPARATOR + p2res;
         }
         if ( p2point > p1point && p2point < 4 ) {
-            if ( p2point == 2 )
-                p2res = TennisScore.THIRTY.getScore ( );
-            if ( p2point == 3 )
-                p2res = TennisScore.FORTY.getScore ( );
-            if ( p1point == 1 )
-                p1res = TennisScore.FIFTEEN.getScore ( );
-            if ( p1point == 2 )
-                p1res = TennisScore.THIRTY.getScore ( );
+            p1res = getSuitableMessage (p1point);
+            p2res = getSuitableMessage (p2point);
             score = p1res + SEPARATOR + p2res;
         }
 
