@@ -1,12 +1,16 @@
 public enum TennisScore {
-    DEUCE ("Deuce"), FORTY ("Forty"), THIRTY ("Thirty"), FIFTEEN ("Fifteen"), LOVE ("Love");
-    private String value;
+    LOVE ("Love"),
+    FIFTEEN ("Fifteen"),
+    THIRTY ("Thirty"),
+    FORTY ("Forty"),
+    DEUCE ("Deuce");
+    private String score;
 
-    public String getValue() {
-        return value;
+    public String getScore() {
+        return score;
     }
 
-    TennisScore(String value) {
-        this.value = value;
+    TennisScore(String score) {
+        this.score = score;
     }
 }

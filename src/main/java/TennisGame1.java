@@ -41,11 +41,11 @@ public class TennisGame1 implements TennisGame {
     private String getScoreAfterForty() {
         int minusResult = m_score1 - m_score2;
         if ( minusResult > 0 )
-            return getScoreAfterForty (minusResult, player1Name);
-        return getScoreAfterForty (minusResult, player2Name);
+            return checkAdvantageOrWin (minusResult, player1Name);
+        return checkAdvantageOrWin (minusResult, player2Name);
     }
 
-    private String getScoreAfterForty(int minusResult, String playerName) {
+    private String checkAdvantageOrWin(int minusResult, String playerName) {
         return Math.abs (minusResult) == 1 ? "Advantage " + playerName : "Win for " + playerName;
     }
 
@@ -62,19 +62,19 @@ public class TennisGame1 implements TennisGame {
                 score = getSuitableMessage (TennisScore.THIRTY, isEqualScore);
                 break;
             default:
-                score =  getSuitableMessage (TennisScore.FORTY, isEqualScore);
+                score = getSuitableMessage (TennisScore.FORTY, isEqualScore);
         }
         return score;
     }
 
     String getSuitableMessage(TennisScore message, boolean equalScore) {
-        String lastMessage = message.getValue ();
+        String lastMessage = message.getScore ( );
 
         if ( equalScore )
             if ( !message.equals (TennisScore.FORTY) )
                 lastMessage = lastMessage + SEPARATOR + ALL;
             else
-                lastMessage = TennisScore.DEUCE.getValue ();
+                lastMessage = TennisScore.DEUCE.getScore ( );
         return lastMessage;
 
     }
