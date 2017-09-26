@@ -22,26 +22,19 @@ public class TennisGame2 implements TennisGame {
     }
 
     private String caseEqualScore(int point) {
-        String score;
-        if ( point < 3 ) {
-            score = getSuitableMessage (point);
-            score += SEPARATOR + ALL;
-        } else
-            score = TennisScore.DEUCE.getScoreLabel ( );
-        return score;
+        if ( point < 3 )
+            return getSuitableMessage (point) + SEPARATOR + ALL;
+        return TennisScore.DEUCE.getScoreLabel ( );
     }
 
     private String caseNotEqualScore(int pointOne, int pointTwo) {
-        String score;
         final boolean isBreakGame = pointOne >= 4 || pointTwo >= 4;
-        if ( isBreakGame ) {
-            score = getScoreBreakGame (pointOne, pointTwo);
-        } else {
-            p1res = getSuitableMessage (pointOne);
-            p2res = getSuitableMessage (pointTwo);
-            score = p1res + SEPARATOR + p2res;
-        }
-        return score;
+        if ( isBreakGame )
+            return getScoreBreakGame (pointOne, pointTwo);
+        p1res = getSuitableMessage (pointOne);
+        p2res = getSuitableMessage (pointTwo);
+        return p1res + SEPARATOR + p2res;
+
     }
 
     private String getScoreBreakGame(int pointOne, int pointTwo) {
@@ -49,7 +42,6 @@ public class TennisGame2 implements TennisGame {
         final boolean isPlayerOneInHead = differenceResults > 0;
         if ( isPlayerOneInHead )
             return getAdvantageOrWin (differenceResults, player1Name);
-
         return getAdvantageOrWin (differenceResults, player2Name);
 
     }
