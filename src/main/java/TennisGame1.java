@@ -2,7 +2,6 @@
 public class TennisGame1 implements TennisGame {
     public static final String SEPARATOR = "-";
     public static final String ALL = "All";
-    public static final boolean EQUAL_SCORE = true;
     private int m_score1 = 0;
     private int m_score2 = 0;
     private String player1Name;
@@ -22,19 +21,27 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         if ( m_score1 == m_score2 )
-            return getScoreBeforeForty (m_score1, EQUAL_SCORE);
-        else {
+            return getEqualScoreBeforeForty (m_score1);
 
-            if ( isBreakPoint ( ) )
-                return getScoreAfterForty ( );
-            else
-                return getScoreBeforeForty (m_score1, !EQUAL_SCORE)
-                        + SEPARATOR
-                        + getScoreBeforeForty (m_score2, !EQUAL_SCORE);
-        }
+        else if ( isBreakOrMatchPoint ( ) )
+            return getScoreAfterForty ( );
+
+        return getScoreBeforeForty (m_score1)
+                + SEPARATOR
+                + getScoreBeforeForty (m_score2);
     }
 
-    private boolean isBreakPoint() {
+    private String getEqualScoreBeforeForty(int score) {
+        final boolean isDeuce = score >= 3;
+        if ( isDeuce )
+            return TennisScore.DEUCE.getScoreLabel ( );
+        TennisScore tennisScore = TennisScore.getScore (score);
+        return tennisScore.getScoreLabel ( ) + SEPARATOR + ALL;
+
+
+    }
+
+    private boolean isBreakOrMatchPoint() {
         return m_score1 >= 4 || m_score2 >= 4;
     }
 
@@ -49,33 +56,11 @@ public class TennisGame1 implements TennisGame {
         return Math.abs (minusResult) == 1 ? "Advantage " + playerName : "Win for " + playerName;
     }
 
-    private String getScoreBeforeForty(int tempScore, boolean isEqualScore) {
-        String score;
-        switch (tempScore) {
-            case 0:
-                score = getSuitableMessage (TennisScore.LOVE, isEqualScore);
-                break;
-            case 1:
-                score = getSuitableMessage (TennisScore.FIFTEEN, isEqualScore);
-                break;
-            case 2:
-                score = getSuitableMessage (TennisScore.THIRTY, isEqualScore);
-                break;
-            default:
-                score = getSuitableMessage (TennisScore.FORTY, isEqualScore);
-        }
-        return score;
+    private String getScoreBeforeForty(int tempScore) {
+
+        TennisScore tennisScore = TennisScore.getScore (tempScore);
+        return tennisScore.getScoreLabel ( );
     }
 
-    String getSuitableMessage(TennisScore message, boolean equalScore) {
-        String lastMessage = message.getScore ( );
 
-        if ( equalScore )
-            if ( !message.equals (TennisScore.FORTY) )
-                lastMessage = lastMessage + SEPARATOR + ALL;
-            else
-                lastMessage = TennisScore.DEUCE.getScore ( );
-        return lastMessage;
-
-    }
 }

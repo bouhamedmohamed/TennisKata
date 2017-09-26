@@ -21,7 +21,7 @@ public class TennisGame2 implements TennisGame {
                 score = getSuitableMessage (p1point);
                 score += SEPARATOR + ALL;
             } else
-                score = TennisScore.DEUCE.getScore ( );
+                score = TennisScore.DEUCE.getScoreLabel ( );
         }
 
         if ( p1point != p2point ) {
@@ -50,13 +50,13 @@ public class TennisGame2 implements TennisGame {
 
     private String getSuitableMessage(int Score) {
         if ( Score == 0 )
-            return TennisScore.LOVE.getScore ( );
+            return TennisScore.LOVE.getScoreLabel ( );
         if ( Score == 1 )
-            return TennisScore.FIFTEEN.getScore ( );
+            return TennisScore.FIFTEEN.getScoreLabel ( );
         if ( Score == 2 )
-            return TennisScore.THIRTY.getScore ( );
+            return TennisScore.THIRTY.getScoreLabel ( );
         else
-            return TennisScore.FORTY.getScore ( );
+            return TennisScore.FORTY.getScoreLabel ( );
     }
 
     public void P1Score() {
