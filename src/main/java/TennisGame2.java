@@ -1,23 +1,23 @@
 public class TennisGame2 implements TennisGame {
     public static final String SEPARATOR = "-";
     public static final String ALL = "All";
-    public int p1point = 0;
-    public int p2point = 0;
+    public int pointPlayerOne = 0;
+    public int pointPlayerTwo = 0;
 
-    public String p1res = "";
-    public String p2res = "";
-    private String player1Name;
-    private String player2Name;
+    public String resultPlayerOne = "";
+    public String resultPlayerTwo = "";
+    private String playerOneName;
+    private String playerTwoName;
 
     public TennisGame2(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+        this.playerOneName = player1Name;
+        this.playerTwoName = player2Name;
     }
 
     public String getScore() {
-        if ( p1point == p2point )
-            return caseEqualScore (p1point);
-        return caseNotEqualScore (p1point, p2point);
+        if ( pointPlayerOne == pointPlayerTwo )
+            return caseEqualScore (pointPlayerOne);
+        return caseNotEqualScore (pointPlayerOne, pointPlayerTwo);
 
     }
 
@@ -31,9 +31,9 @@ public class TennisGame2 implements TennisGame {
         final boolean isBreakGame = pointOne >= 4 || pointTwo >= 4;
         if ( isBreakGame )
             return getScoreBreakGame (pointOne, pointTwo);
-        p1res = getSuitableMessage (pointOne);
-        p2res = getSuitableMessage (pointTwo);
-        return p1res + SEPARATOR + p2res;
+        resultPlayerOne = getSuitableMessage (pointOne);
+        resultPlayerTwo = getSuitableMessage (pointTwo);
+        return resultPlayerOne + SEPARATOR + resultPlayerTwo;
 
     }
 
@@ -41,8 +41,8 @@ public class TennisGame2 implements TennisGame {
         int differenceResults = pointOne - pointTwo;
         final boolean isPlayerOneInHead = differenceResults > 0;
         if ( isPlayerOneInHead )
-            return getAdvantageOrWin (differenceResults, player1Name);
-        return getAdvantageOrWin (differenceResults, player2Name);
+            return getAdvantageOrWin (differenceResults, playerOneName);
+        return getAdvantageOrWin (differenceResults, playerTwoName);
 
     }
 
@@ -55,11 +55,11 @@ public class TennisGame2 implements TennisGame {
     }
 
     public void P1Score() {
-        p1point++;
+        pointPlayerOne++;
     }
 
     public void P2Score() {
-        p2point++;
+        pointPlayerTwo++;
     }
 
     public void wonPoint(String player) {
