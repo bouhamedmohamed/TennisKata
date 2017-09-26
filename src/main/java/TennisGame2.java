@@ -1,4 +1,3 @@
-
 public class TennisGame2 implements TennisGame {
     public static final String SEPARATOR = "-";
     public static final String ALL = "All";
@@ -17,12 +16,13 @@ public class TennisGame2 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        if ( p1point == p2point && p1point < 4 ) {
-            score = getSuitableMessage (p1point);
-            score += SEPARATOR + ALL;
+        if ( p1point == p2point ) {
+            if ( p1point < 3 ) {
+                score = getSuitableMessage (p1point);
+                score += SEPARATOR + ALL;
+            } else
+                score = TennisScore.DEUCE.getScore ( );
         }
-        if ( p1point == p2point && p1point >= 3 )
-            score = TennisScore.DEUCE.getScore ( );
 
         if ( p1point != p2point && p1point < 4 && p2point < 4 ) {
             p1res = getSuitableMessage (p1point);
