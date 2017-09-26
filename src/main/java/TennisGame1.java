@@ -37,8 +37,6 @@ public class TennisGame1 implements TennisGame {
             return TennisScore.DEUCE.getScoreLabel ( );
         TennisScore tennisScore = TennisScore.getScore (score);
         return tennisScore.getScoreLabel ( ) + SEPARATOR + ALL;
-
-
     }
 
     private boolean isBreakOrMatchPoint() {
@@ -61,6 +59,4 @@ public class TennisGame1 implements TennisGame {
         TennisScore tennisScore = TennisScore.getScore (tempScore);
         return tennisScore.getScoreLabel ( );
     }
-
-
 }
