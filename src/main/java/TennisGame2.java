@@ -15,49 +15,43 @@ public class TennisGame2 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        if ( p1point == p2point ) {
-            score = caseEqualScore ( );
-        }
+        if ( p1point == p2point )
+            return caseEqualScore (p1point);
+        return caseNotEqualScore (p1point, p2point);
 
-        if ( p1point != p2point ) {
-            score = caseNotEqualScore ( );
-        }
-        return score;
     }
 
-    private String caseEqualScore() {
+    private String caseEqualScore(int point) {
         String score;
-        if ( p1point < 3 ) {
-            score = getSuitableMessage (p1point);
+        if ( point < 3 ) {
+            score = getSuitableMessage (point);
             score += SEPARATOR + ALL;
         } else
             score = TennisScore.DEUCE.getScoreLabel ( );
         return score;
     }
 
-    private String caseNotEqualScore() {
+    private String caseNotEqualScore(int pointOne, int pointTwo) {
         String score;
-        final boolean isBreakGame = p1point >= 4 || p2point >= 4;
+        final boolean isBreakGame = pointOne >= 4 || pointTwo >= 4;
         if ( isBreakGame ) {
-            score = getScoreBreakGame ( );
+            score = getScoreBreakGame (pointOne, pointTwo);
         } else {
-            p1res = getSuitableMessage (p1point);
-            p2res = getSuitableMessage (p2point);
+            p1res = getSuitableMessage (pointOne);
+            p2res = getSuitableMessage (pointTwo);
             score = p1res + SEPARATOR + p2res;
         }
         return score;
     }
 
-    private String getScoreBreakGame() {
-        String score;
-        int differenceResults = p1point - p2point;
+    private String getScoreBreakGame(int pointOne, int pointTwo) {
+        int differenceResults = pointOne - pointTwo;
         final boolean isPlayerOneInHead = differenceResults > 0;
         if ( isPlayerOneInHead )
-            score = getAdvantageOrWin (differenceResults, player1Name);
-        else
-            score = getAdvantageOrWin (differenceResults, player2Name);
-        return score;
+            return getAdvantageOrWin (differenceResults, player1Name);
+
+        return getAdvantageOrWin (differenceResults, player2Name);
+
     }
 
     private String getAdvantageOrWin(int differenceResults, String playerName) {
