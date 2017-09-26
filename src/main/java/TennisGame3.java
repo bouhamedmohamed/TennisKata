@@ -12,15 +12,17 @@ public class TennisGame3 implements TennisGame {
     }
 
     public String getScore() {
-        String s;
+
         if ( pointPlayerOne < 4 && pointPlayerTwo < 4 && !(pointPlayerOne + pointPlayerTwo == 6) ) {
-            s = TennisScore.getScore (pointPlayerOne).getScoreLabel ( );
-            return (pointPlayerOne == pointPlayerTwo) ? s + "-All" : s + "-" + TennisScore.getScore (pointPlayerTwo).getScoreLabel ( );
+            final String scoreLabelPlayerOne = TennisScore.getScore (pointPlayerOne).getScoreLabel ( );
+            final String scoreLabelPlayerTwo = TennisScore.getScore (pointPlayerTwo).getScoreLabel ( );
+            return (pointPlayerOne == pointPlayerTwo) ? scoreLabelPlayerOne + "-All" : scoreLabelPlayerOne + "-" + scoreLabelPlayerTwo;
         } else {
             if ( pointPlayerOne == pointPlayerTwo )
                 return "Deuce";
-            s = pointPlayerOne > pointPlayerTwo ? playerOneName : playerTwoName;
-            return ((pointPlayerOne - pointPlayerTwo) * (pointPlayerOne - pointPlayerTwo) == 1) ? "Advantage " + s : "Win for " + s;
+            String inHead = pointPlayerOne > pointPlayerTwo ? playerOneName : playerTwoName;
+            final int difference = pointPlayerOne - pointPlayerTwo;
+            return (Math.abs (difference) == 1) ? "Advantage " + inHead : "Win for " + inHead;
         }
     }
 
