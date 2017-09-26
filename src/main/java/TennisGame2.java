@@ -30,12 +30,7 @@ public class TennisGame2 implements TennisGame {
             p2res = TennisScore.LOVE.getScore ( );
             score = p1res + SEPARATOR + p2res;
         }
-        if ( p2point > 0 && p1point == 0 ) {
-            p2res = getSuitableMessage (p2point);
 
-            p1res = TennisScore.LOVE.getScore ( );
-            score = p1res + SEPARATOR + p2res;
-        }
 
         if ( p1point != p2point && p1point < 4 && p2point < 4 ) {
             p1res = getSuitableMessage (p1point);
