@@ -37,16 +37,12 @@ public class TennisGame2 implements TennisGame {
             score = p1res + SEPARATOR + p2res;
         }
 
-        if ( p1point > p2point && p1point < 4 ) {
+        if ( p1point != p2point && p1point < 4 && p2point < 4 ) {
             p1res = getSuitableMessage (p1point);
             p2res = getSuitableMessage (p2point);
             score = p1res + SEPARATOR + p2res;
         }
-        if ( p2point > p1point && p2point < 4 ) {
-            p1res = getSuitableMessage (p1point);
-            p2res = getSuitableMessage (p2point);
-            score = p1res + SEPARATOR + p2res;
-        }
+
 
         if ( p1point > p2point && p2point >= 3 ) {
             score = "Advantage " + player1Name;
