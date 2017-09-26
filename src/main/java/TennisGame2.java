@@ -84,28 +84,12 @@ public class TennisGame2 implements TennisGame {
         }
 
         if ( P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2 ) {
-            score = "Win for player1";
+            score = "Win for " + player1Name;
         }
         if ( P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2 ) {
-            score = "Win for player2";
+            score = "Win for " + player2Name;
         }
         return score;
-    }
-
-    public void SetP1Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P1Score ( );
-        }
-
-    }
-
-    public void SetP2Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P2Score ( );
-        }
-
     }
 
     public void P1Score() {
