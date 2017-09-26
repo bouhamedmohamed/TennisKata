@@ -30,23 +30,13 @@ public class TennisGame2 implements TennisGame {
             score = TennisScore.DEUCE.getScore ( );
 
         if ( P1point > 0 && P2point == 0 ) {
-            if ( P1point == 1 )
-                P1res = TennisScore.FIFTEEN.getScore ( );
-            if ( P1point == 2 )
-                P1res = TennisScore.THIRTY.getScore ( );
-            if ( P1point == 3 )
-                P1res = TennisScore.FORTY.getScore ( );
+            P1res = getSuitableMessage (P1point);
 
             P2res = TennisScore.LOVE.getScore ( );
             score = P1res + SEPARATOR + P2res;
         }
         if ( P2point > 0 && P1point == 0 ) {
-            if ( P2point == 1 )
-                P2res = TennisScore.FIFTEEN.getScore ( );
-            if ( P2point == 2 )
-                P2res = TennisScore.THIRTY.getScore ( );
-            if ( P2point == 3 )
-                P2res = TennisScore.FORTY.getScore ( );
+            P2res = getSuitableMessage (P2point);
 
             P1res = TennisScore.LOVE.getScore ( );
             score = P1res + SEPARATOR + P2res;
@@ -90,6 +80,15 @@ public class TennisGame2 implements TennisGame {
             score = "Win for player2";
         }
         return score;
+    }
+
+    private String getSuitableMessage(int Score) {
+        if ( Score == 1 )
+            return TennisScore.FIFTEEN.getScore ( );
+        if ( Score == 2 )
+            return TennisScore.THIRTY.getScore ( );
+        else
+            return TennisScore.FORTY.getScore ( );
     }
 
     public void P1Score() {
