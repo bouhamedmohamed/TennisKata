@@ -42,10 +42,14 @@ public class TennisGame2 implements TennisGame {
         int differenceResults = p1point - p2point;
         final boolean isPlayerOneInHead = differenceResults > 0;
         if ( isPlayerOneInHead )
-            score = differenceResults == 1 ? "Advantage " + player1Name : "Win for " + player1Name;
+            score = getAdvantageOrWin (differenceResults, player1Name);
         else
-            score = differenceResults == -1 ? "Advantage " + player2Name : "Win for " + player2Name;
+            score = getAdvantageOrWin (differenceResults, player2Name);
         return score;
+    }
+
+    private String getAdvantageOrWin(int differenceResults, String playerName) {
+        return Math.abs (differenceResults) == 1 ? "Advantage " + playerName : "Win for " + playerName;
     }
 
     private String getSuitableMessage(int Score) {
