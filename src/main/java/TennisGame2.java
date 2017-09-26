@@ -52,15 +52,8 @@ public class TennisGame2 implements TennisGame {
         return Math.abs (differenceResults) == 1 ? "Advantage " + playerName : "Win for " + playerName;
     }
 
-    private String getSuitableMessage(int Score) {
-        if ( Score == 0 )
-            return TennisScore.LOVE.getScoreLabel ( );
-        if ( Score == 1 )
-            return TennisScore.FIFTEEN.getScoreLabel ( );
-        if ( Score == 2 )
-            return TennisScore.THIRTY.getScoreLabel ( );
-        else
-            return TennisScore.FORTY.getScoreLabel ( );
+    private String getSuitableMessage(int score) {
+        return TennisScore.getScore (score).getScoreLabel ( );
     }
 
     public void P1Score() {
