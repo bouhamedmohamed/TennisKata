@@ -1,18 +1,13 @@
 
 public class TennisGame3 implements TennisGame {
-
-    public static final String SEPARATOR = "-";
-    public static final String ALL = "All";
-    public static final String ADVANTAGE = "Advantage ";
-    public static final String WIN_FOR = "Win for ";
     private int pointPlayerTwo;
     private int pointPlayerOne;
     private String playerOneName;
     private String playerTwoName;
 
-    public TennisGame3(String p1N, String p2N) {
-        this.playerOneName = p1N;
-        this.playerTwoName = p2N;
+    public TennisGame3(String playerOneName, String playerTwoName) {
+        this.playerOneName = playerOneName;
+        this.playerTwoName = playerTwoName;
     }
 
     public String getScore() {
@@ -33,20 +28,20 @@ public class TennisGame3 implements TennisGame {
         if ( point >= 3 )
             return TennisScore.DEUCE.getScoreLabel ( );
         final String scoreLabel = TennisScore.getScore (point).getScoreLabel ( );
-        return scoreLabel + SEPARATOR + ALL;
+        return scoreLabel + Rules.SEPARATOR + Rules.ALL;
     }
 
     private String scoreBeforeBreakGame() {
         final String scoreLabelPlayerOne = TennisScore.getScore (pointPlayerOne).getScoreLabel ( );
         final String scoreLabelPlayerTwo = TennisScore.getScore (pointPlayerTwo).getScoreLabel ( );
-        return scoreLabelPlayerOne + SEPARATOR + scoreLabelPlayerTwo;
+        return scoreLabelPlayerOne + Rules.SEPARATOR + scoreLabelPlayerTwo;
     }
 
     private String getAdvantagedOrWinner() {
 
         String playerInHead = pointPlayerOne > pointPlayerTwo ? playerOneName : playerTwoName;
         final int difference = pointPlayerOne - pointPlayerTwo;
-        return (Math.abs (difference) == 1) ? ADVANTAGE + playerInHead : WIN_FOR + playerInHead;
+        return (Math.abs (difference) == 1) ? Rules.ADVANTAGE + playerInHead : Rules.WIN_FOR + playerInHead;
     }
 
     public void wonPoint(String playerName) {

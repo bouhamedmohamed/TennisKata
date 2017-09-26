@@ -1,7 +1,5 @@
 
 public class TennisGame1 implements TennisGame {
-    public static final String SEPARATOR = "-";
-    public static final String ALL = "All";
     private int pointPlayerOne = 0;
     private int pointPlayerTwo = 0;
     private String playerOneName;
@@ -27,7 +25,7 @@ public class TennisGame1 implements TennisGame {
             return getScoreAfterForty ( );
 
         return getScoreBeforeForty (pointPlayerOne)
-                + SEPARATOR
+                + Rules.SEPARATOR.getValue ( )
                 + getScoreBeforeForty (pointPlayerTwo);
     }
 
@@ -36,7 +34,7 @@ public class TennisGame1 implements TennisGame {
         if ( isDeuce )
             return TennisScore.DEUCE.getScoreLabel ( );
         TennisScore tennisScore = TennisScore.getScore (score);
-        return tennisScore.getScoreLabel ( ) + SEPARATOR + ALL;
+        return tennisScore.getScoreLabel ( ) + Rules.SEPARATOR.getValue ( ) + Rules.ALL.getValue ( );
     }
 
     private boolean isBreakOrMatchPoint() {
@@ -51,7 +49,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String checkAdvantageOrWin(int minusResult, String playerName) {
-        return Math.abs (minusResult) == 1 ? "Advantage " + playerName : "Win for " + playerName;
+        return Math.abs (minusResult) == 1 ? Rules.ADVANTAGE.getValue ( ) + playerName : Rules.WIN_FOR.getValue ( ) + playerName;
     }
 
     private String getScoreBeforeForty(int tempScore) {

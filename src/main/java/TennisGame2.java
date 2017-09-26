@@ -1,8 +1,5 @@
 public class TennisGame2 implements TennisGame {
-    public static final String SEPARATOR = "-";
-    public static final String ALL = "All";
-    public static final String ADVANTAGE = "Advantage ";
-    public static final String WIN_FOR = "Win for ";
+
     public int pointPlayerOne = 0;
     public int pointPlayerTwo = 0;
 
@@ -25,7 +22,7 @@ public class TennisGame2 implements TennisGame {
 
     private String caseEqualScore(int point) {
         if ( point < 3 )
-            return getSuitableMessage (point) + SEPARATOR + ALL;
+            return getSuitableMessage (point) + Rules.SEPARATOR + Rules.ALL;
         return TennisScore.DEUCE.getScoreLabel ( );
     }
 
@@ -35,7 +32,7 @@ public class TennisGame2 implements TennisGame {
             return getScoreBreakGame (pointOne, pointTwo);
         resultPlayerOne = getSuitableMessage (pointOne);
         resultPlayerTwo = getSuitableMessage (pointTwo);
-        return resultPlayerOne + SEPARATOR + resultPlayerTwo;
+        return resultPlayerOne + Rules.SEPARATOR + resultPlayerTwo;
 
     }
 
@@ -49,7 +46,7 @@ public class TennisGame2 implements TennisGame {
     }
 
     private String getAdvantageOrWin(int differenceResults, String playerName) {
-        return Math.abs (differenceResults) == 1 ? ADVANTAGE + playerName : WIN_FOR + playerName;
+        return Math.abs (differenceResults) == 1 ? Rules.ADVANTAGE + playerName : Rules.WIN_FOR + playerName;
     }
 
     private String getSuitableMessage(int score) {
